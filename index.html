@@ -1,49 +1,259 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>이예린 | 개인 웹사이트</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9f9f9;
-      color: #333;
-      line-height: 1.6;
-      padding: 2rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    h1 {
-      color: #222;
-      font-size: 2rem;
-    }
-    .info {
-      margin-top: 1rem;
-      padding: 1rem;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .info p {
-      margin: 0.5rem 0;
-    }
-    a {
-      color: #0077cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <h1>안녕하세요! 이예린입니다 👋</h1>
-  <div class="info">
-    <p>💻 <strong>소개:</strong> React Native로 앱을 만들고 있어요.</p>
-    <p>📂 <strong>GitHub:</strong> <a href="https://github.com/yerin719" target="_blank">github.com/yerin719</a></p>
-    <p>📧 <strong>메일:</strong> <a href="mailto:woow0719@gmail.com">woow0719@gmail.com</a></p>
-    <p>📱 <strong>전화번호:</strong> 010-4305-0719</p>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>내 링크 모음</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 480px;
+        text-align: center;
+      }
+
+      .profile-section {
+        margin-bottom: 40px;
+      }
+
+      .profile-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 4px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+        object-fit: cover;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      }
+
+      .profile-name {
+        color: white;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .profile-bio {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.5;
+        padding: 0 20px;
+      }
+
+      .links-section {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .link-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.95);
+        color: #333;
+        text-decoration: none;
+        padding: 16px 24px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .link-button:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+
+      .link-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        background: white;
+      }
+
+      .link-button:hover:before {
+        left: 100%;
+      }
+
+      .link-button:active {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .link-button.disabled {
+        background: rgba(255, 255, 255, 0.5);
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: 0.6;
+      }
+
+      .link-button.disabled:hover {
+        transform: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .link-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        vertical-align: middle;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .footer {
+        margin-top: 40px;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 14px;
+      }
+
+      /* 모바일 최적화 */
+      @media (max-width: 480px) {
+        .container {
+          max-width: 100%;
+        }
+
+        .profile-name {
+          font-size: 22px;
+        }
+
+        .profile-bio {
+          font-size: 15px;
+        }
+
+        .link-button {
+          font-size: 15px;
+          padding: 14px 20px;
+        }
+      }
+
+      /* 다크모드 지원 */
+      @media (prefers-color-scheme: dark) {
+        .link-button {
+          background: rgba(255, 255, 255, 0.9);
+        }
+      }
+
+      /* 애니메이션 */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .container > * {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
+
+      .profile-section {
+        animation-delay: 0.1s;
+      }
+
+      .links-section .link-button:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+      .links-section .link-button:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+      .links-section .link-button:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      .links-section .link-button:nth-child(4) {
+        animation-delay: 0.5s;
+      }
+      .links-section .link-button:nth-child(5) {
+        animation-delay: 0.6s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- 프로필 섹션 -->
+      <div class="profile-section">
+        <img src="yerin.jpeg" alt="프로필 이미지" class="profile-image" />
+        <h1 class="profile-name">이예린</h1>
+        <p class="profile-bio">1인 개발자 | 크리에이터</p>
+        <p class="profile-bio">✉️ yerin71994@gmail.com</p>
+      </div>
+
+      <!-- 링크 버튼 섹션 -->
+      <div class="links-section">
+        <a href="#" class="link-button disabled">
+          <img src="danhbak.png" alt="단호박" class="link-icon" />
+          <span
+            >단호박 | 단백질 쉐이크 성분 비교 및 추천 사이트 [출시예정]</span
+          >
+        </a>
+        <a
+          href="https://apps.apple.com/kr/app/%EB%B0%80%EB%85%B8%ED%8A%B8-%EC%8B%9D%EB%8B%A8-%EC%9D%BC%EA%B8%B0-%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8-%EC%8B%9D%EC%82%AC-%EA%B8%B0%EB%A1%9D-%EC%95%B1/id6747025104"
+          target="_blank"
+          class="link-button"
+        >
+          <img src="meal_note_icon.png" alt="밀노트" class="link-icon" />
+          <span>밀노트 – 식단 일기, 다이어트 식사 기록 앱</span>
+        </a>
+
+        <a
+          href="https://apps.apple.com/kr/app/%EC%88%9C%EA%B3%B5%EC%8B%9C%EA%B0%84-%EA%B3%84%ED%9A%8D%ED%95%98%EA%B3%A0-%EC%A7%91%EC%A4%91%ED%95%98%EB%8A%94-%EA%B3%B5%EB%B6%80-%ED%83%80%EC%9D%B4%EB%A8%B8-%EC%95%B1/id6748931524"
+          target="_blank"
+          class="link-button"
+        >
+          <img src="sungong.png" alt="순공시간" class="link-icon" />
+          <span>순공시간 - 계획하고 집중하는 공부 타이머 앱</span>
+        </a>
+
+        <a
+          href="https://apps.apple.com/kr/app/%ED%83%80%EC%9E%84%EC%8A%A4%ED%83%AC%ED%94%84-%EC%9B%8C%ED%84%B0%EB%A7%88%ED%81%AC-%EC%97%86%EB%8A%94-%EC%9D%B8%EC%A6%9D%EC%83%B7-%EC%B9%B4%EB%A9%94%EB%9D%BC/id6749433753"
+          target="_blank"
+          class="link-button"
+        >
+          <img src="time_stamp.png" alt="타임스탬프" class="link-icon" />
+          <span>타임스탬프 - 워터마크 없는 인증샷 카메라 앱</span>
+        </a>
+      </div>
+
+      <!-- 푸터 -->
+      <footer class="footer">
+        <p>© 2025 Yerin</p>
+      </footer>
+    </div>
+  </body>
 </html>
